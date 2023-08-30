@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Eksport kontaktów2
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Eksport kontaktów googla do CSV, klawisz pojawi się po prawej na dole.
 // @author       Dominik Banik dominik.banik@ekookna.pl
 // @match        https://contacts.google.com/label/*
@@ -64,8 +64,7 @@
                 if(phone.length>9){
                     uwagi = "UWAGA";
                 }
-                let contact =
-                    name + "," + email + "," + phone + "," + uwagi + "\r\n";
+                let contact = name + ",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"+email+",,"+phone + "," + uwagi + "\r\n";
                 if (!phone || phone === null || phone === '') {
                     return;
                 }
@@ -78,7 +77,7 @@
     }
 
     async function main(){
-        let naglowki = "Name,E-mail 1 - Value,Phone 1 - Value,Uwagi\r\n";
+        let naglowki = "Name,Given Name,Additional Name,Family Name,Yomi Name,Given Name Yomi,Additional Name Yomi,Family Name Yomi,Name Prefix,Name Suffix,Initials,Nickname,Short Name,Maiden Name,Birthday,Gender,Location,Billing Information,Directory Server,Mileage,Occupation,Hobby,Sensitivity,Priority,Subject,Notes,Language,Photo,Group Membership,E-mail 1 - Type,E-mail 1 - Value,Phone 1 - Type,Phone 1 - Value,Uwagi\r\n";
         window.exportedContactsStorage = [];
         exportedContactsStorage.push(naglowki);
         window.scroller = document.querySelectorAll(".ZvpjBb.C8Dkz")[0].parentElement.parentElement.parentElement.parentElement.parentElement;
